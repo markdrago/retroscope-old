@@ -1,0 +1,9 @@
+#monitor, #mirror {
+    height: 300px;
+    display: none;
+}
+
+.delay {
+    height: 300px;
+    width: 400px;
+}

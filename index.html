@@ -4,20 +4,8 @@
 <head>
 <title>Retroscope</title>
 
-<style type="text/css">
-#monitor, #mirror {
-    height: 300px;
-    display: none;
-}
-
-.delay {
-    height: 300px;
-    width: 400px;
-}
-
-</style>
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="src/style.css" />
+<script type="text/javascript" src="src/lib/jquery.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -102,7 +90,7 @@ $(document).ready(function() {
     <video id="monitor" autoplay></video>
     <canvas id="mirror" width="400" height="300"></canvas>
     <img class="delay" data-delay="1"/>
-    <img class="delay" data-delay="60"/>
-    <img class="delay" data-delay="600"/>
+    <img class="delay" data-delay="2"/>
+    <img class="delay" data-delay="3"/>
 </body>
 </html>
