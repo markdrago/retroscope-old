@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Retroscope</title>
+
+<style type="text/css">
+#monitor, #mirror {
+    height: 300px;
+    display: none;
+}
+
+.delay {
+    height: 300px;
+    width: 400px;
+}
+
+</style>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
+    window.URL = window.URL || window.webkitURL;
+    var canvas = $("#mirror").get(0);
+    var video = $("#monitor").get(0);
+    var dealy = $("#delay").get(0);
+    var context = canvas.getContext('2d');
+    var buffer = new Array();
+
+    var fps = 10;
+
+    init();
+
+    function init() {
+        navigator.getUserMedia({video: true}, got_stream, no_stream);
+    }
+
+    function no_stream(e) {
+        alert("No camera available.");
+    }
+
+    function got_stream(stream) {
+        if (window.URL) {
+            video.src = window.URL.createObjectURL(stream);
+        } else {
+            video.src = stream; // Opera.
+        }
+
+        video.onerror = function(e) {
+            stream.stop();
+        };
+
+        stream.onended = no_stream;
+
+        setTimeout(function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+        }, 50);
+
+        setInterval(function() {
+            captureFrame(video, buffer);
+
+            $("#len").text(buffer.length);
+
+            //get all delay elements
+            var delays = $(".delay");
+
+            var maxDelay = 0;
+            delays.each(function (index, elem) {
+                //get the delay for this element and track max delay
+                var delaySeconds = $(elem).data("delay");
+                maxDelay = Math.max(maxDelay, delaySeconds);
+
+                //show the right frame for this element
+                var frameOffset = fps * delaySeconds;
+                if (buffer.length >= frameOffset) {
+                    var delayUrl = buffer[buffer.length - frameOffset];
+                    elem.src = delayUrl;
+                }
+            });
+
+            //drop out old frames
+            if (buffer.length >= fps * maxDelay) {
+                buffer.shift();
+            }
+        }, 1000 / fps);
+    }
+
+    function captureFrame(video, buffer) {
+        context.drawImage(video, 0, 0);
+        var dataUrl = canvas.toDataURL('image/webp');
+        buffer.push(dataUrl);
+    }
+});
+</script>
+
+</head>
+<body>
+    <div id="len"></div>
+    <video id="monitor" autoplay></video>
+    <canvas id="mirror" width="400" height="300"></canvas>
+    <img class="delay" data-delay="1"/>
+    <img class="delay" data-delay="60"/>
+    <img class="delay" data-delay="600"/>
+</body>
+</html>
