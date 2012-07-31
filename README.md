@@ -17,3 +17,9 @@ happened.
 - Parties (see yourself arrive, watch replays of funny moments)
 - Board Game Night (watch yourself perform in charades)
 - Toddler Entertainment
+
+### Usage
+
+- Access the page using a publicly accessible webserver (try `python -m SimpleHTTPServer`)
+
+- Using chrome, make sure "Enable PeerConnection" and "Enable Media Source API on <video> elements" are **activated** in `chrome://flags/`
