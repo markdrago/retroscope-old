@@ -21,5 +21,4 @@ happened.
 ### Usage
 
 - Access the page using a publicly accessible webserver (try `python -m SimpleHTTPServer`)
-
-- Using chrome, make sure "Enable PeerConnection" and "Enable Media Source API on <video> elements" are **activated** in `chrome://flags/`
+- Using chrome, make sure "Enable Media Source API on <video> elements" is **activated** in `chrome://flags/`
