@@ -10,6 +10,7 @@
 <script type="text/javascript" src="src/captor.js"></script>
 <script type="text/javascript" src="src/buffer.js"></script>
 <script type="text/javascript" src="src/dispatcher.js"></script>
+<script type="text/javascript" src="src/layout.js"></script>
 <script type="text/javascript" src="src/mainloop.js"></script>
 
 <script type="text/javascript">
@@ -17,16 +18,23 @@ $(document).ready(function() {
     var captor = new Captor();
     var buffer = new Buffer();
     var dispatcher = new Dispatcher(buffer);
-    var mainloop = new MainLoop(captor, buffer, dispatcher);
 
+    var layout = new Layout();
+    layout.set_dimensions();
+
+    var mainloop = new MainLoop(captor, buffer, dispatcher);
     mainloop.run();
 });
 </script>
 
 </head>
 <body>
+    <div id="images">
     <img class="delay" data-delay="2"/>
-    <img class="delay" data-delay="5"/>
-    <img class="delay" data-delay="10"/>
+    <img class="delay" data-delay="4"/>
+    <br />
+    <img class="delay" data-delay="6"/>
+    <img class="delay" data-delay="8"/>
+    </div>
 </body>
 </html>
