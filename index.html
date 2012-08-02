@@ -12,17 +12,21 @@
 <script type="text/javascript" src="src/dispatcher.js"></script>
 <script type="text/javascript" src="src/layout.js"></script>
 <script type="text/javascript" src="src/mainloop.js"></script>
+<script type="text/javascript" src="src/scoreboard.js"></script>
+<script type="text/javascript" src="src/ui_events.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var captor = new Captor();
+    var scoreboard = new ScoreBoard();
+    var captor = new Captor(scoreboard);
     var buffer = new Buffer();
     var dispatcher = new Dispatcher(buffer);
 
+    var uievents = new UiEvents(scoreboard);
     var layout = new Layout();
     layout.set_dimensions();
 
-    var mainloop = new MainLoop(captor, buffer, dispatcher);
+    var mainloop = new MainLoop(captor, buffer, dispatcher, scoreboard);
     mainloop.run();
 });
 </script>
@@ -35,6 +39,19 @@ $(document).ready(function() {
     <br />
     <img class="delay" data-delay="6"/>
     <img class="delay" data-delay="8"/>
+    </div>
+    <div id="sidebar">
+    <a id="about">About</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a id="toggle_debug">Debug</a>
+    </div>
+
+    <div id="debug" style="display: none">
+      Frame Time: <span id="total_frame_time">0</span> ms<br />
+      Total Captor Time: <span id="captor_time">0</span> ms<br />
+      Copy To Canvas Time: <span id="copy_to_canvas_time">0</span> ms<br />
+      To Data URL Time: <span id="to_data_url_time">0</span> ms<br />
+      Update Display Time: <span id="update_display_time">0</span> ms<br />
     </div>
 </body>
 </html>

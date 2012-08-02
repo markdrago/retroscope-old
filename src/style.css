@@ -7,6 +7,37 @@ body {
   background-color: black;
 }
 
+div#sidebar {
+  color: #202020;
+//  background-color: gray;
+  position: fixed;
+  top: 190px;
+  right: -190px;
+  width: 400px;
+  padding: 10px 0px 10px 20px;
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+}
+
+div#sidebar a {
+  cursor: pointer;
+}
+
+div#debug {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 250px;
+  height: 100px;
+  padding: 10px;
+  opacity: 0.75;
+  font-size: small;
+  background-color: #202020;
+  color: gray;
+}
+
 div#images {
   margin-left: auto;
   margin-right: auto;

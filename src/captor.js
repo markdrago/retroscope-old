@@ -6,7 +6,11 @@
 navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
 window.URL = window.URL || window.webkitURL;
 
-function Captor() {
+function Captor(scoreboard) {
+    this.scoreboard = scoreboard;
+    this.scoreboard.create_avg_item("copy_to_canvas_time", 100);
+    this.scoreboard.create_avg_item("to_data_url_time", 100);
+
     this.create_elements();
 
     var that = this;
@@ -55,9 +59,20 @@ Captor.prototype.no_stream = function(e) {
 }
 
 Captor.prototype.get_frame = function() {
+    var start = (new Date).getTime();
+
     /* copy video data on to the canvas */
     this.context.drawImage(this.video_element, 0, 0);
+    var copy_to_canvas_time = (new Date).getTime();
 
-    /* return a webp image of the canvas data as a data URL */
-    return this.canvas_element.toDataURL('image/webp');
+    /* return an image of the canvas data as a data URL
+     * webp was too slow to return from toDataURL
+     * png was too slow when updating all of the images */
+    var frame_data =  this.canvas_element.toDataURL('image/jpeg');
+    var to_data_url_time = (new Date).getTime();
+
+    this.scoreboard.report_avg_item("copy_to_canvas_time", copy_to_canvas_time - start);
+    this.scoreboard.report_avg_item("to_data_url_time", to_data_url_time - start);
+
+    return frame_data;
 }
