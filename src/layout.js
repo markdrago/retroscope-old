@@ -35,7 +35,7 @@ Layout.prototype.set_delay_image_dimensions = function() {
     //set dimensions of images
     var height = this.get_delay_image_height();
     var width = this.get_delay_image_width();
-    $(".delay").each(function(index, elem) {
+    $(".box").add(".delay").each(function(index, elem) {
         $(elem).css({'width': width, 'height': height});
     });
 };

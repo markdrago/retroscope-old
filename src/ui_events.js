@@ -9,11 +9,16 @@ UiEvents.prototype.init_events = function() {
         $("#debug").toggle();
     });
 
-    //update scoreboard every second
     var that = this;
+
+    //update scoreboard every second
     setInterval(function() {
         that.update_scoreboard();
     }, 3000);
+
+    $(document).ready(function() {
+        that.update_delay_labels();
+    });
 };
 
 UiEvents.prototype.update_scoreboard = function() {
@@ -26,4 +31,11 @@ UiEvents.prototype.update_scoreboard = function() {
 
 UiEvents.prototype.update_scoreboard_item = function(name) {
     $("#" + name).text(this.scoreboard.get_avg_item(name).toFixed(2));
+}
+
+UiEvents.prototype.update_delay_labels = function() {
+    $(".delay").each(function(index, elem) {
+        var delay = $(elem).data('delay');
+        $(elem).parent().find(".delaylabel").text(delay + " seconds ago");
+    });
 }

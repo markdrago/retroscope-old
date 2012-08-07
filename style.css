@@ -43,9 +43,22 @@ div#images {
   margin-right: auto;
 }
 
+div.box {
+  position: relative;
+  float: left;
+}
+
+div.meta {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: small;
+  color: white;
+  text-shadow: black 0.1em 0.1em 0.2em
+}
+
 div#images img {
   margin: 0;
   padding: 0;
   display: block;
-  float: left;
 }
