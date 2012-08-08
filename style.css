@@ -52,9 +52,12 @@ div.meta {
   position: absolute;
   top: 20px;
   left: 20px;
+
   font-size: small;
   color: white;
-  text-shadow: black 0.1em 0.1em 0.2em
+  text-shadow: black 0.1em 0.1em 0.2em;
+
+  cursor: pointer;
 }
 
 div#images img {

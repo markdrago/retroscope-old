@@ -16,6 +16,31 @@ UiEvents.prototype.init_events = function() {
         that.update_scoreboard();
     }, 3000);
 
+    $(".delaylabel").on('click', function(event) {
+        $(this).hide();
+        var selectbox = "<select class=\"delaychanger\">";
+        selectbox += "<option value=\"2\">2 seconds</option>";
+        selectbox += "<option value=\"4\">4 seconds</option>";
+        selectbox += "<option value=\"6\">6 seconds</option>";
+        selectbox += "<option value=\"8\">8 seconds</option>";
+        selectbox += "<option value=\"10\">10 seconds</option>";
+        selectbox += "<option value=\"15\">15 seconds</option>";
+        selectbox += "<option value=\"30\">30 seconds</option>";
+        selectbox += "</select>";
+        $(this).closest('.meta').append(selectbox);
+
+        var delay = $(this).closest('.box').find(".delay").data('delay');
+        $(this).closest('.meta').find("select").val(delay);
+    });
+
+    $(".meta").on('change blur', '.delaychanger', function(event) {
+        var box = $(this).closest('.box');
+        box.find(".delay").data('delay', $(this).val());
+        $(this).remove();
+        that.update_delay_labels();
+        box.find(".delaylabel").show();
+    });
+
     $(document).ready(function() {
         that.update_delay_labels();
     });
@@ -36,6 +61,7 @@ UiEvents.prototype.update_scoreboard_item = function(name) {
 UiEvents.prototype.update_delay_labels = function() {
     $(".delay").each(function(index, elem) {
         var delay = $(elem).data('delay');
-        $(elem).parent().find(".delaylabel").text(delay + " seconds ago");
+        var label = delay + " seconds ago";
+        $(elem).closest('.box').find(".delaylabel").text(label);
     });
 }
