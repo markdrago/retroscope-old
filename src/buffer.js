@@ -1,9 +1,15 @@
-function Buffer() {
+function Buffer(scoreboard) {
+    this.scoreboard = scoreboard;
     this.buffer = new Array();
+    this.buffer_in_memory = 0;
+
+    this.scoreboard.create_count_item("buffer_in_memory");
 }
 
 Buffer.prototype.append_frame = function(frame) {
     this.buffer.push(frame);
+    this.buffer_in_memory += frame.length;
+    this.scoreboard.report_count_item("buffer_in_memory", this.buffer_in_memory);
 };
 
 Buffer.prototype.get_frame = function(frame_offset) {
@@ -17,7 +23,8 @@ Buffer.prototype.get_frame = function(frame_offset) {
 
 Buffer.prototype.collect_garbage = function(frame_retention) {
     while (this.buffer.length > frame_retention) {
-        this.buffer.shift();
+        var oldframe = this.buffer.shift();
+        this.buffer_in_memory -= oldframe.length
     }
 };
 

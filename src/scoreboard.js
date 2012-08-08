@@ -6,6 +6,18 @@ function ScoreBoard() {
     this.items = {};
 }
 
+ScoreBoard.prototype.create_count_item = function(name) {
+    this.items[name] = 0;
+}
+
+ScoreBoard.prototype.report_count_item = function(name, value) {
+    this.items[name] = value;
+}
+
+ScoreBoard.prototype.get_count_item = function(name) {
+    return this.items[name];
+}
+
 ScoreBoard.prototype.create_avg_item = function(name, size) {
     this.items[name] = new RollingAverage(size);
 }

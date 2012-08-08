@@ -1,13 +1,18 @@
 function UiEvents(scoreboard) {
     this.scoreboard = scoreboard;
 
-    this.init_events();
+    var that = this;
+    $(document).ready(function() {
+        that.init_events();
+    });
 }
 
 UiEvents.prototype.init_events = function() {
     $("#toggle_debug").on('click', function(event) {
         $("#debug").toggle();
     });
+
+    this.update_delay_labels();
 
     var that = this;
 
@@ -40,10 +45,6 @@ UiEvents.prototype.init_events = function() {
         that.update_delay_labels();
         box.find(".delaylabel").show();
     });
-
-    $(document).ready(function() {
-        that.update_delay_labels();
-    });
 };
 
 UiEvents.prototype.update_scoreboard = function() {
@@ -52,6 +53,10 @@ UiEvents.prototype.update_scoreboard = function() {
     this.update_scoreboard_item("copy_to_canvas_time");
     this.update_scoreboard_item("to_data_url_time");
     this.update_scoreboard_item("update_display_time");
+
+    var buffer_in_memory = this.scoreboard.get_count_item("buffer_in_memory");
+    buffer_in_memory /= 1048576;
+    $("#buffer_in_memory").text(buffer_in_memory.toFixed(2));
 }
 
 UiEvents.prototype.update_scoreboard_item = function(name) {
