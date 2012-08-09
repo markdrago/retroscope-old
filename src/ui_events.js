@@ -57,6 +57,12 @@ UiEvents.prototype.update_scoreboard = function() {
     var buffer_in_memory = this.scoreboard.get_count_item("buffer_in_memory");
     buffer_in_memory /= 1048576;
     $("#buffer_in_memory").text(buffer_in_memory.toFixed(2));
+
+    var fps_limit = this.scoreboard.get_count_item("fps_limit");
+    $("#fps_limit").text(fps_limit.toFixed(2));
+
+    var fps = this.scoreboard.get_count_item("fps");
+    $("#fps").text(fps.toFixed(2));
 }
 
 UiEvents.prototype.update_scoreboard_item = function(name) {
