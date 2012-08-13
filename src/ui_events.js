@@ -53,6 +53,7 @@ UiEvents.prototype.update_scoreboard = function() {
     this.update_scoreboard_item("copy_to_canvas_time");
     this.update_scoreboard_item("to_data_url_time");
     this.update_scoreboard_item("update_display_time");
+    this.update_scoreboard_item("wait_time");
 
     var buffer_in_memory = this.scoreboard.get_count_item("buffer_in_memory");
     buffer_in_memory /= 1048576;
