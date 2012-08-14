@@ -18,11 +18,12 @@
 <script type="text/javascript">
 $(document).ready(function() {
     var scoreboard = new ScoreBoard();
-    var captor = new Captor(scoreboard);
+    var uievents = new UiEvents(scoreboard);
+
+    var captor = new Captor(scoreboard, uievents);
     var buffer = new Buffer(scoreboard);
     var dispatcher = new Dispatcher(buffer);
 
-    var uievents = new UiEvents(scoreboard);
     var layout = new Layout();
     layout.set_dimensions();
 

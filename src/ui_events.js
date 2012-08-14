@@ -1,6 +1,8 @@
 function UiEvents(scoreboard) {
     this.scoreboard = scoreboard;
 
+    this.event_registry = {};
+
     var that = this;
     $(document).ready(function() {
         that.init_events();
@@ -8,8 +10,11 @@ function UiEvents(scoreboard) {
 }
 
 UiEvents.prototype.init_events = function() {
+    var that = this;
     $("#toggle_debug").on('click', function(event) {
         $("#debug").toggle();
+        var debug_is_on = $("#debug").is(":visible");
+        that.fire_event('debug', {debug: debug_is_on});
     });
 
     this.update_delay_labels();
@@ -45,6 +50,22 @@ UiEvents.prototype.init_events = function() {
         that.update_delay_labels();
         box.find(".delaylabel").show();
     });
+};
+
+UiEvents.prototype.register_for_event = function(event, callback) {
+    if (! (event in this.event_registry)) {
+        this.event_registry[event] = new Array();
+    }
+    this.event_registry[event].push(callback);
+};
+
+UiEvents.prototype.fire_event = function(event, data) {
+    if (event in this.event_registry) {
+        for (var i in this.event_registry[event]) {
+            var callback = this.event_registry[event][i];
+            callback(data);
+        }
+    }
 };
 
 UiEvents.prototype.update_scoreboard = function() {
