@@ -12,6 +12,7 @@ function MainLoop(captor, buffer, dispatcher, scoreboard) {
     this.scoreboard.create_avg_item("update_display_time", 100);
     this.scoreboard.create_avg_item("garbage_collect_time", 100);
     this.scoreboard.create_avg_item("wait_time", 100);
+    this.scoreboard.create_avg_item("loop_diff_from_desired", 100);
     this.scoreboard.create_count_item("fps_limit");
     this.scoreboard.create_count_item("fps");
     this.scoreboard.report_count_item("fps", this.fps);
@@ -29,6 +30,7 @@ MainLoop.prototype.run = function() {
 
 MainLoop.prototype.loop = function() {
     var start = (new Date).getTime();
+    this.scoreboard.report_avg_item("loop_diff_from_desired", start - this.desired_wall_time);
 
     var frame = this.captor.get_frame();
     var captor_time = (new Date).getTime();
@@ -53,6 +55,7 @@ MainLoop.prototype.loop = function() {
         that.loop();
     }, Math.max(0, wait_time));
 
+    this.desired_wall_time = start + target_time;
     this.scoreboard.report_avg_item("wait_time", wait_time);
 };
 
