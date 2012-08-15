@@ -49,7 +49,8 @@ MainLoop.prototype.loop = function() {
     //time that should lapse from start to start
     var target_time = 1000 / this.fps;
     var end_time = (new Date).getTime();
-    var wait_time = target_time - (end_time - start);
+    var timer_delay = this.scoreboard.get_avg_item("loop_diff_from_desired");
+    var wait_time = Math.max(0, target_time - (end_time - start) - timer_delay);
     var that = this;
     setTimeout(function() {
         that.loop();
@@ -62,10 +63,11 @@ MainLoop.prototype.loop = function() {
 MainLoop.prototype.adjust_fps = function() {
     /* get a sense for how quickly the loop is running */
     var frame_time = this.scoreboard.get_avg_item("total_frame_time");
+    var timer_delay = this.scoreboard.get_avg_item("loop_diff_from_desired");
 
     /* what fps could be supported given the time it took to draw
-     * the last few frames */
-    var fps_limit = 1000 / frame_time;
+     * the last few frames and the setTimeout inaccuracies */
+    var fps_limit = 1000 / (frame_time + timer_delay);
 
     this.scoreboard.report_count_item("fps_limit", fps_limit);
 

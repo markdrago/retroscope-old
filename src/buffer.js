@@ -24,7 +24,9 @@ Buffer.prototype.get_frame = function(frame_offset) {
 Buffer.prototype.collect_garbage = function(frame_retention) {
     while (this.buffer.length > frame_retention) {
         var oldframe = this.buffer.shift();
-        this.buffer_in_memory -= oldframe.length
+        if (oldframe != undefined) {
+            this.buffer_in_memory -= oldframe.length
+        }
     }
 };
 
