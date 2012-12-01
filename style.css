@@ -3,8 +3,13 @@
   margin: 0;
 }
 
+ul {
+  margin-left: 50px;
+}
+
 body {
   background-color: black;
+  font-family: arial, sans;
 }
 
 div#sidebar {
@@ -36,6 +41,26 @@ div#debug {
   font-size: small;
   background-color: #202020;
   color: gray;
+}
+
+div#about {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  margin-left: -350px;
+  height: 450px;
+  margin-top: -225px;  
+  padding: 10px;
+  opacity: 0.75;
+  background-color: black;
+  color: white;
+}
+
+div#about a,
+div#about a:visited,
+div#about a:active {
+  color: white;
 }
 
 div#images {

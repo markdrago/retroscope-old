@@ -65,7 +65,7 @@ $(document).ready(function() {
     </div>
 
     <div id="sidebar">
-    <a id="about">About</a>
+    <a id="toggle_about">About</a>
     &nbsp;&nbsp; | &nbsp;&nbsp;
     <a id="toggle_debug">Debug</a>
     </div>
@@ -83,6 +83,38 @@ $(document).ready(function() {
       Update Display Time: <span id="update_display_time">0</span> ms<br />
       <br />
       Buffer in Memory: <span id="buffer_in_memory">0</span> MB<br />
+    </div>
+
+    <div id="about">
+      <h2>Retroscope</h2>
+      The retroscope uses your webcam to show you what happened a
+      little while ago.  It does not send the video anywhere at all -
+      it is all stored locally on your computer.
+      Here are some uses for the retroscope:
+      <ul>
+        <li>Add some fun to your office</li>
+        <li>Leave it running during a party</li>
+        <li>Entertain a toddler for a while</li>
+        <li>Watch replays of charades</li>
+      </ul>
+      <br />
+      I'm sure there are many uses which I haven't thought of yet.
+      You can control how far in to the past you watch by clicking on
+      the label of each video and changing the delay.
+      <br /><br />
+      <h2>Technology</h2>
+      The retroscope uses some new and fun browser tech:
+      <ul>
+        <li>getUserMedia</li>
+        <li>canvas</li>
+        <li>data URLs</li>
+        <li>filesystem API (coming soon)</li>
+      </ul>
+      <br />
+      <h2>Plug</h2>
+      Are you a software enginner that finds this retroscope thing to
+      be interesting and fun?  Then why don't you come and chat with
+      me about it while <a href="http://www.yodlecareers.com/departments/technology/">interviewing at Yodle</a>?
     </div>
 </body>
 </html>

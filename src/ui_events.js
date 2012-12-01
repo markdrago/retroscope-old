@@ -17,6 +17,10 @@ UiEvents.prototype.init_events = function() {
         that.fire_event('debug', {debug: debug_is_on});
     });
 
+    $("#toggle_about").on('click', function(event) {
+        $("#about").toggle();
+    });
+
     this.update_delay_labels();
 
     var that = this;
